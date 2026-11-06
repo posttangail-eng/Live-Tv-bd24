@@ -1,0 +1,6 @@
+{
+  "name": "বাংলাদেশ লাইভ টিভি (BD Live TV)",
+  "description": "বাংলাদেশের সব জনপ্রিয় জাতীয়, সংবাদ, বিনোদন, ইসলামিক ও খেলাধুলার টিভি চ্যানেল সরাসরি সম্প্রচার ও অনুষ্ঠান সূচি সহ উপভোগ করুন।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
