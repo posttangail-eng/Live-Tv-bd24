@@ -321,7 +321,7 @@ export default function App() {
           </div>
 
           <div className="text-slate-400 text-[11px]">
-            © {new Date().getFullYear()} সকল স্যাটেলাইট টিভি চ্যানেলের স্বত্ব নিজ নিজ কর্তৃপক্ষের সংরক্ষিত।
+            © {new Date().getFullYear()} সর্বস্বত্ব <span className="text-slate-200 font-semibold">Rasel IT Tech</span> কর্তৃক সংরক্ষিত।
           </div>
         </div>
       </footer>
