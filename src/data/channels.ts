@@ -212,11 +212,12 @@ export const BD_CHANNELS: Channel[] = [
     category: 'news',
     categoryLabel: 'সংবাদ',
     streamType: 'youtube',
-    youtubeId: 'u4lGg4l79v8',
+    // ATN News Live Stream from user: https://www.youtube.com/live/SUgGzqrCDRU
+    youtubeId: 'SUgGzqrCDRU',
     websiteUrl: 'https://atnnewstv.com',
     badgeColor: 'bg-red-800',
-    resolution: '720p HD',
-    description: 'বাংলার প্রথম সংবাদ চ্যানেল। সত্যের সন্ধানে নির্ভীক সাংবাদিকতা।',
+    resolution: '1080p FHD',
+    description: 'বাংলার প্রথম সংবাদ চ্যানেল। সত্যের সন্ধানে নির্ভীক সাংবাদিকতা সরাসরি।',
     programs: createDailySchedule('news', 'এটিএন নিউজ'),
   },
 
@@ -257,11 +258,12 @@ export const BD_CHANNELS: Channel[] = [
     category: 'entertainment',
     categoryLabel: 'বিনোদন ও নাটক',
     streamType: 'youtube',
-    youtubeId: '-6ZlU87Jd24',
+    // NTV Live Stream from user: https://www.youtube.com/live/bzkwxuW8Z4k
+    youtubeId: 'bzkwxuW8Z4k',
     websiteUrl: 'https://ntvbd.com',
     badgeColor: 'bg-sky-600',
     resolution: '1080p FHD',
-    description: 'সময়ের সাথে আগামীর পথে। দর্শকপ্রিয় নাটক, ক্লোজআপ ওয়ান ও রিয়েলিটি শো।',
+    description: 'সময়ের সাথে আগামীর পথে। দর্শকপ্রিয় নাটক, ক্লোজআপ ওয়ান ও রিয়েলিটি শো সরাসরি।',
     programs: createDailySchedule('entertainment', 'এনটিভি'),
   },
   {
