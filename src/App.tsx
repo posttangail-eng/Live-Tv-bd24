@@ -307,7 +307,12 @@ export default function App() {
       {/* Quiet, Clean Footer */}
       <footer className="mt-12 py-8 bg-slate-950 border-t border-slate-900 text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
+            <img
+              src="/assets/aistudio/file_000000006ba88211b87c74e501960b0f_676cae08.png"
+              alt="বাংলাদেশ লাইভ টিভি"
+              className="w-6 h-6 rounded-lg object-cover"
+            />
             <span className="font-bold text-slate-200">বাংলাদেশ লাইভ টিভি (BD Live TV)</span>
             <span>·</span>
             <span>সর্বমোট {channels.length} টি চ্যানেল সম্প্রচারিত</span>

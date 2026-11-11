@@ -25,9 +25,11 @@ export const Header: React.FC<HeaderProps> = ({
         
         {/* Zone 1: Single text element wordmark with icon */}
         <div className="flex items-center gap-3 shrink-0">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 text-white font-bold">
-            <Tv className="w-5 h-5 text-white" />
-          </div>
+          <img
+            src="/assets/aistudio/file_000000006ba88211b87c74e501960b0f_676cae08.png"
+            alt="বাংলাদেশ লাইভ টিভি"
+            className="w-10 h-10 rounded-xl object-cover shadow-lg shadow-emerald-500/25 border border-emerald-500/30 shrink-0"
+          />
           <div className="flex flex-col">
             <span className="text-lg font-bold tracking-tight text-white leading-tight whitespace-nowrap">
               বাংলাদেশ লাইভ টিভি

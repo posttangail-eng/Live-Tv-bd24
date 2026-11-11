@@ -66,9 +66,11 @@ export const VirtualRemote: React.FC<VirtualRemoteProps> = ({
 
         {/* Remote Header / Brand */}
         <div className="flex flex-col items-center mb-4">
-          <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-1">
-            <Tv className="w-4 h-4" />
-          </div>
+          <img
+            src="/assets/aistudio/file_000000006ba88211b87c74e501960b0f_676cae08.png"
+            alt="বাংলাদেশ লাইভ টিভি"
+            className="w-10 h-10 rounded-xl object-cover shadow-md mb-1 border border-emerald-500/30"
+          />
           <span className="text-xs font-bold tracking-widest uppercase text-slate-400">
             স্মার্ট টিভি রিমোট
           </span>
