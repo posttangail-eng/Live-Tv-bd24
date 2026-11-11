@@ -1,12 +1,11 @@
 import React from 'react';
-import { Tv, Radio, Moon, Sun, Smartphone } from 'lucide-react';
+import { Tv, Moon, Sun, Smartphone } from 'lucide-react';
 import { ChannelCategory } from '../types/tv';
 
 interface HeaderProps {
   currentCategory: ChannelCategory;
   onSelectCategory: (cat: ChannelCategory) => void;
   onOpenRemote: () => void;
-  onOpenEpg: () => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
   favoriteCount: number;
@@ -16,7 +15,6 @@ export const Header: React.FC<HeaderProps> = ({
   currentCategory,
   onSelectCategory,
   onOpenRemote,
-  onOpenEpg,
   isDarkMode,
   onToggleTheme,
   favoriteCount,
@@ -73,13 +71,6 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             খেলাধুলা
-          </button>
-          <button
-            onClick={onOpenEpg}
-            className="transition-colors whitespace-nowrap shrink-0 hover:text-white flex items-center gap-1.5"
-          >
-            <Radio className="w-3.5 h-3.5 text-emerald-400" />
-            অনুষ্ঠান সূচি
           </button>
           {favoriteCount > 0 && (
             <button

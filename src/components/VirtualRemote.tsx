@@ -24,7 +24,6 @@ interface VirtualRemoteProps {
   onSelectChannel: (channel: Channel) => void;
   onNextChannel: () => void;
   onPrevChannel: () => void;
-  onOpenEpg: () => void;
 }
 
 export const VirtualRemote: React.FC<VirtualRemoteProps> = ({
@@ -35,7 +34,6 @@ export const VirtualRemote: React.FC<VirtualRemoteProps> = ({
   onSelectChannel,
   onNextChannel,
   onPrevChannel,
-  onOpenEpg,
 }) => {
   const [digitBuffer, setDigitBuffer] = useState<string>('');
 
@@ -100,14 +98,11 @@ export const VirtualRemote: React.FC<VirtualRemoteProps> = ({
           </button>
 
           <button
-            onClick={() => {
-              onClose();
-              onOpenEpg();
-            }}
-            title="অনুষ্ঠান সূচি"
+            onClick={() => onSelectChannel(activeChannel)}
+            title="চ্যানেল রিফ্রেশ করুন"
             className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 transition-transform active:scale-95"
           >
-            <Radio className="w-4 h-4" />
+            <RotateCw className="w-4 h-4" />
           </button>
         </div>
 

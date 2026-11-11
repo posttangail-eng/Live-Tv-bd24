@@ -12,7 +12,6 @@ interface ChannelListProps {
   onSelectCategory: (cat: ChannelCategory) => void;
   searchQuery: string;
   onSearchChange: (q: string) => void;
-  onOpenEpgForChannel: (channel: Channel) => void;
 }
 
 const CATEGORY_TABS: { id: ChannelCategory; label: string; count?: number }[] = [
@@ -36,7 +35,6 @@ export const ChannelList: React.FC<ChannelListProps> = ({
   onSelectCategory,
   searchQuery,
   onSearchChange,
-  onOpenEpgForChannel,
 }) => {
   // Filter channels based on search and category
   const filteredChannels = useMemo(() => {
@@ -221,20 +219,9 @@ export const ChannelList: React.FC<ChannelListProps> = ({
 
                 {/* Program teaser */}
                 <div className="text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/60 p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
-                  <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 flex items-center justify-between mb-0.5">
-                    <span>চলমান অনুষ্ঠান</span>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenEpgForChannel(channel);
-                      }}
-                      className="text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1 font-medium"
-                    >
-                      <Radio className="w-3 h-3" />
-                      <span>সূচি</span>
-                    </button>
-                  </div>
+                  <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 block mb-0.5">
+                    চলমান অনুষ্ঠান
+                  </span>
                   <p className="font-medium truncate text-slate-800 dark:text-slate-200">
                     {currentShow}
                   </p>

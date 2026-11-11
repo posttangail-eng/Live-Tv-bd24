@@ -26,7 +26,6 @@ interface PlayerProps {
   onToggleFavorite: (id: string) => void;
   onNextChannel: () => void;
   onPrevChannel: () => void;
-  onOpenEpg: () => void;
   isTheaterMode: boolean;
   onToggleTheater: () => void;
 }
@@ -37,7 +36,6 @@ export const Player: React.FC<PlayerProps> = ({
   onToggleFavorite,
   onNextChannel,
   onPrevChannel,
-  onOpenEpg,
   isTheaterMode,
   onToggleTheater,
 }) => {
@@ -338,15 +336,6 @@ export const Player: React.FC<PlayerProps> = ({
                 isFavorite ? 'fill-red-500 text-red-500' : 'text-slate-300'
               }`}
             />
-          </button>
-
-          <button
-            onClick={onOpenEpg}
-            title="আজকের অনুষ্ঠান সূচি দেখুন"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700/80 text-xs font-medium"
-          >
-            <Radio className="w-3.5 h-3.5 text-emerald-400" />
-            <span>সূচি</span>
           </button>
         </div>
       </div>

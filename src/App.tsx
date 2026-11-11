@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Header } from './components/Header';
 import { Player } from './components/Player';
 import { ChannelList } from './components/ChannelList';
-import { ProgramGuide } from './components/ProgramGuide';
 import { VirtualRemote } from './components/VirtualRemote';
 import { NewsTicker } from './components/NewsTicker';
 import { BD_CHANNELS } from './data/channels';
@@ -68,7 +67,6 @@ export default function App() {
 
   // Modals & UI States
   const [isRemoteOpen, setIsRemoteOpen] = useState<boolean>(false);
-  const [isEpgOpen, setIsEpgOpen] = useState<boolean>(false);
   const [isTheaterMode, setIsTheaterMode] = useState<boolean>(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState<boolean>(false);
 
@@ -133,7 +131,6 @@ export default function App() {
         currentCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
         onOpenRemote={() => setIsRemoteOpen(true)}
-        onOpenEpg={() => setIsEpgOpen(true)}
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode((prev) => !prev)}
         favoriteCount={favorites.length}
@@ -153,7 +150,6 @@ export default function App() {
             onToggleFavorite={handleToggleFavorite}
             onNextChannel={handleNextChannel}
             onPrevChannel={handlePrevChannel}
-            onOpenEpg={() => setIsEpgOpen(true)}
             isTheaterMode={isTheaterMode}
             onToggleTheater={() => setIsTheaterMode((prev) => !prev)}
           />
@@ -205,14 +201,6 @@ export default function App() {
               >
                 <Tv className="w-3.5 h-3.5 text-emerald-400" />
                 <span>টিভি রিমোট</span>
-              </button>
-
-              <button
-                onClick={() => setIsEpgOpen(true)}
-                className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 border border-slate-700"
-              >
-                <Radio className="w-3.5 h-3.5 text-emerald-400" />
-                <span>অনুষ্ঠান সূচি</span>
               </button>
 
               <button
@@ -301,22 +289,9 @@ export default function App() {
           onSelectCategory={setSelectedCategory}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
-          onOpenEpgForChannel={(ch) => {
-            setActiveChannel(ch);
-            setIsEpgOpen(true);
-          }}
         />
 
       </main>
-
-      {/* Program Guide Modal */}
-      <ProgramGuide
-        isOpen={isEpgOpen}
-        onClose={() => setIsEpgOpen(false)}
-        channels={channels}
-        selectedChannel={activeChannel}
-        onSelectChannel={handleSelectChannel}
-      />
 
       {/* Smart TV Remote Control Modal */}
       <VirtualRemote
@@ -327,7 +302,6 @@ export default function App() {
         onSelectChannel={handleSelectChannel}
         onNextChannel={handleNextChannel}
         onPrevChannel={handlePrevChannel}
-        onOpenEpg={() => setIsEpgOpen(true)}
       />
 
       {/* Quiet, Clean Footer */}
@@ -344,13 +318,6 @@ export default function App() {
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>নিরবচ্ছিন্ন এইচডি সম্প্রচার</span>
             </span>
-            <span>·</span>
-            <button
-              onClick={() => setIsEpgOpen(true)}
-              className="hover:text-emerald-400 transition-colors"
-            >
-              অনুষ্ঠান সূচি
-            </button>
           </div>
 
           <div className="text-slate-400 text-[11px]">
