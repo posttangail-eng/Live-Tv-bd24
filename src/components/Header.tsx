@@ -1,12 +1,11 @@
 import React from 'react';
-import { Tv, Radio, Plus, Moon, Sun, Smartphone } from 'lucide-react';
+import { Tv, Radio, Moon, Sun, Smartphone } from 'lucide-react';
 import { ChannelCategory } from '../types/tv';
 
 interface HeaderProps {
   currentCategory: ChannelCategory;
   onSelectCategory: (cat: ChannelCategory) => void;
   onOpenRemote: () => void;
-  onOpenAddChannel: () => void;
   onOpenEpg: () => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
@@ -17,7 +16,6 @@ export const Header: React.FC<HeaderProps> = ({
   currentCategory,
   onSelectCategory,
   onOpenRemote,
-  onOpenAddChannel,
   onOpenEpg,
   isDarkMode,
   onToggleTheme,
@@ -104,15 +102,6 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <Smartphone className="w-3.5 h-3.5 text-emerald-400" />
             <span className="hidden sm:inline">টিভি রিমোট</span>
-          </button>
-
-          <button
-            onClick={onOpenAddChannel}
-            title="নতুন চ্যানেল বা স্ট্রিম লিংক যোগ করুন"
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-colors whitespace-nowrap"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>চ্যানেল যোগ</span>
           </button>
 
           <button

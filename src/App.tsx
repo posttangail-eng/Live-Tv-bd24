@@ -4,7 +4,6 @@ import { Player } from './components/Player';
 import { ChannelList } from './components/ChannelList';
 import { ProgramGuide } from './components/ProgramGuide';
 import { VirtualRemote } from './components/VirtualRemote';
-import { AddChannelModal } from './components/AddChannelModal';
 import { NewsTicker } from './components/NewsTicker';
 import { BD_CHANNELS } from './data/channels';
 import { Channel, ChannelCategory } from './types/tv';
@@ -54,14 +53,14 @@ export default function App() {
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_FAVORITES_KEY);
-      return saved ? JSON.parse(saved) : ['jamuna-tv', 'somoy-tv', 'btv-national', 't-sports'];
+      return saved ? JSON.parse(saved) : ['somoy-tv', 'btv-national', 'jamuna-tv', 't-sports'];
     } catch {
-      return ['jamuna-tv', 'somoy-tv', 'btv-national', 't-sports'];
+      return ['somoy-tv', 'btv-national', 'jamuna-tv', 't-sports'];
     }
   });
 
   // Recently watched history (IDs)
-  const [recentChannels, setRecentChannels] = useState<string[]>(['jamuna-tv', 'somoy-tv', 'btv-national']);
+  const [recentChannels, setRecentChannels] = useState<string[]>(['somoy-tv', 'btv-national', 'jamuna-tv']);
 
   // Filters
   const [selectedCategory, setSelectedCategory] = useState<ChannelCategory>('all');
@@ -70,7 +69,6 @@ export default function App() {
   // Modals & UI States
   const [isRemoteOpen, setIsRemoteOpen] = useState<boolean>(false);
   const [isEpgOpen, setIsEpgOpen] = useState<boolean>(false);
-  const [isAddChannelOpen, setIsAddChannelOpen] = useState<boolean>(false);
   const [isTheaterMode, setIsTheaterMode] = useState<boolean>(false);
   const [showKeyboardShortcuts, setShowKeyboardShortcuts] = useState<boolean>(false);
 
@@ -121,17 +119,6 @@ export default function App() {
     handleSelectChannel(channels[prevIndex]);
   };
 
-  // Add custom channel
-  const handleAddChannel = (newChannel: Channel) => {
-    setChannels((prev) => {
-      const updated = [newChannel, ...prev];
-      const customOnly = updated.filter((c) => c.isCustom);
-      localStorage.setItem(STORAGE_CUSTOM_CHANNELS_KEY, JSON.stringify(customOnly));
-      return updated;
-    });
-    handleSelectChannel(newChannel);
-  };
-
   // Channel objects for recently watched
   const recentChannelObjects = useMemo(() => {
     return recentChannels
@@ -146,7 +133,6 @@ export default function App() {
         currentCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
         onOpenRemote={() => setIsRemoteOpen(true)}
-        onOpenAddChannel={() => setIsAddChannelOpen(true)}
         onOpenEpg={() => setIsEpgOpen(true)}
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode((prev) => !prev)}
@@ -344,13 +330,6 @@ export default function App() {
         onOpenEpg={() => setIsEpgOpen(true)}
       />
 
-      {/* Add Custom Channel Modal */}
-      <AddChannelModal
-        isOpen={isAddChannelOpen}
-        onClose={() => setIsAddChannelOpen(false)}
-        onAddChannel={handleAddChannel}
-      />
-
       {/* Quiet, Clean Footer */}
       <footer className="mt-12 py-8 bg-slate-950 border-t border-slate-900 text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -365,13 +344,6 @@ export default function App() {
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>নিরবচ্ছিন্ন এইচডি সম্প্রচার</span>
             </span>
-            <span>·</span>
-            <button
-              onClick={() => setIsAddChannelOpen(true)}
-              className="hover:text-emerald-400 transition-colors"
-            >
-              কাস্টম চ্যানেল যোগ
-            </button>
             <span>·</span>
             <button
               onClick={() => setIsEpgOpen(true)}

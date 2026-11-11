@@ -79,22 +79,7 @@ const createDailySchedule = (genre: string, channelName: string) => {
 };
 
 export const BD_CHANNELS: Channel[] = [
-  // --- NEWS CHANNELS ---
-  {
-    id: 'jamuna-tv',
-    name: 'যমুনা টিভি',
-    nameEn: 'Jamuna Television',
-    category: 'news',
-    categoryLabel: 'সংবাদ',
-    streamType: 'youtube',
-    // Jamuna TV Live Stream ID
-    youtubeId: 'BCqGiwKpiKM',
-    websiteUrl: 'https://jamuna.tv',
-    badgeColor: 'bg-rose-700',
-    resolution: '1080p FHD',
-    description: 'নিরপেক্ষ সংবাদ, অপরাধের অনুসন্ধান ও ব্রেকিং খবরের বিশ্বস্ত স্যাটেলাইট টেলিভিশন চ্যানেল।',
-    programs: createDailySchedule('news', 'যমুনা টিভি'),
-  },
+  // --- TOP CHANNELS ---
   {
     id: 'somoy-tv',
     name: 'সময় টিভি',
@@ -112,6 +97,38 @@ export const BD_CHANNELS: Channel[] = [
     resolution: '1080p FHD',
     description: 'বাংলাদেশের শীর্ষ সংবাদভিত্তিক চ্যানেল। ২৪ ঘণ্টা সর্বশেষ দেশ-বিদেশের ব্রেকিং নিউজ সরাসরি।',
     programs: createDailySchedule('news', 'সময় টিভি'),
+  },
+  {
+    id: 'btv-national',
+    name: 'বাংলাদেশ টেলিভিশন (BTV)',
+    nameEn: 'BTV National',
+    category: 'entertainment',
+    categoryLabel: 'জাতীয় ও বিনোদন',
+    streamType: 'youtube',
+    // BTV Live Stream from user: https://www.youtube.com/live/JR1eu1XmU9c
+    youtubeId: 'JR1eu1XmU9c',
+    hlsUrl: 'https://stream.btv.gov.bd/hls/btv.m3u8',
+    alternativeHlsUrl: 'https://d2e1asnsl7br7b.cloudfront.net/7782/master.m3u8',
+    websiteUrl: 'https://btv.gov.bd',
+    badgeColor: 'bg-green-700',
+    resolution: '1080p FHD',
+    description: 'গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের জাতীয় রাষ্ট্রীয় সম্প্রচার মাধ্যম সরাসরি।',
+    programs: createDailySchedule('entertainment', 'বাংলাদেশ টেলিভিশন'),
+  },
+  {
+    id: 'jamuna-tv',
+    name: 'যমুনা টিভি',
+    nameEn: 'Jamuna Television',
+    category: 'news',
+    categoryLabel: 'সংবাদ',
+    streamType: 'youtube',
+    // Jamuna TV Live Stream ID
+    youtubeId: 'BCqGiwKpiKM',
+    websiteUrl: 'https://jamuna.tv',
+    badgeColor: 'bg-rose-700',
+    resolution: '1080p FHD',
+    description: 'নিরপেক্ষ সংবাদ, অপরাধের অনুসন্ধান ও ব্রেকিং খবরের বিশ্বস্ত স্যাটেলাইট টেলিভিশন চ্যানেল।',
+    programs: createDailySchedule('news', 'যমুনা টিভি'),
   },
   {
     id: 'independent-tv',
@@ -180,11 +197,12 @@ export const BD_CHANNELS: Channel[] = [
     category: 'news',
     categoryLabel: 'সংবাদ',
     streamType: 'youtube',
-    youtubeId: 'XjFkH80aV98',
+    // News24 Live Stream from user: https://www.youtube.com/live/DME0NOvu-ME
+    youtubeId: 'DME0NOvu-ME',
     websiteUrl: 'https://news24bd.tv',
     badgeColor: 'bg-blue-600',
     resolution: '1080p FHD',
-    description: 'বসুন্ধরা গ্রুপের ২৪ ঘণ্টার সার্বক্ষণিক আধুনিক সংবাদ ও লাইভ সম্প্রচার।',
+    description: 'বসুন্ধরা গ্রুপের ২৪ ঘণ্টার সার্বক্ষণিক আধুনিক সংবাদ ও সরাসরি লাইভ সম্প্রচার।',
     programs: createDailySchedule('news', 'নিউজ২৪'),
   },
   {
@@ -203,23 +221,6 @@ export const BD_CHANNELS: Channel[] = [
   },
 
   // --- NATIONAL & ENTERTAINMENT ---
-  {
-    id: 'btv-national',
-    name: 'বাংলাদেশ টেলিভিশন (BTV)',
-    nameEn: 'BTV National',
-    category: 'entertainment',
-    categoryLabel: 'জাতীয় ও বিনোদন',
-    streamType: 'hls',
-    // BTV official HLS IPTV stream + backup
-    hlsUrl: 'https://stream.btv.gov.bd/hls/btv.m3u8',
-    alternativeHlsUrl: 'https://d2e1asnsl7br7b.cloudfront.net/7782/master.m3u8',
-    youtubeId: '2b4i9yLq7eI',
-    websiteUrl: 'https://btv.gov.bd',
-    badgeColor: 'bg-green-700',
-    resolution: '1080p FHD',
-    description: 'গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের জাতীয় রাষ্ট্রীয় সম্প্রচার মাধ্যম।',
-    programs: createDailySchedule('entertainment', 'বাংলাদেশ টেলিভিশন'),
-  },
   {
     id: 'btv-world',
     name: 'বিটিভি ওয়ার্ল্ড',
