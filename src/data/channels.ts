@@ -122,8 +122,8 @@ export const BD_CHANNELS: Channel[] = [
     category: 'news',
     categoryLabel: 'সংবাদ',
     streamType: 'youtube',
-    // Jamuna TV Live Stream ID
-    youtubeId: 'BCqGiwKpiKM',
+    // Jamuna TV Live Stream from user: https://www.youtube.com/live/swTi9vYLWiU
+    youtubeId: 'swTi9vYLWiU',
     websiteUrl: 'https://jamuna.tv',
     badgeColor: 'bg-rose-700',
     resolution: '1080p FHD',
