@@ -75,14 +75,14 @@ export default function App() {
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_FAVORITES_KEY);
-      return saved ? JSON.parse(saved) : ['somoy-tv', 'btv-national', 'jamuna-tv', 't-sports'];
+      return saved ? JSON.parse(saved) : ['btv-national', 'somoy-tv', 'jamuna-tv', 't-sports'];
     } catch {
-      return ['somoy-tv', 'btv-national', 'jamuna-tv', 't-sports'];
+      return ['btv-national', 'somoy-tv', 'jamuna-tv', 't-sports'];
     }
   });
 
   // Recently watched history (IDs)
-  const [recentChannels, setRecentChannels] = useState<string[]>(['somoy-tv', 'btv-national', 'jamuna-tv']);
+  const [recentChannels, setRecentChannels] = useState<string[]>(['btv-national', 'somoy-tv', 'jamuna-tv']);
 
   // Filters
   const [selectedCategory, setSelectedCategory] = useState<ChannelCategory>('all');

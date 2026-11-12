@@ -81,6 +81,24 @@ const createDailySchedule = (genre: string, channelName: string) => {
 export const BD_CHANNELS: Channel[] = [
   // --- TOP CHANNELS ---
   {
+    id: 'btv-national',
+    name: 'বাংলাদেশ টেলিভিশন (BTV)',
+    nameEn: 'BTV National',
+    category: 'entertainment',
+    categoryLabel: 'জাতীয় ও বিনোদন',
+    streamType: 'youtube',
+    // BTV Live Stream from user: https://www.youtube.com/live/QRT8-_VZubU
+    youtubeId: 'QRT8-_VZubU',
+    youtubeLiveUrl: 'https://www.youtube.com/live/QRT8-_VZubU',
+    hlsUrl: 'https://stream.btv.gov.bd/hls/btv.m3u8',
+    alternativeHlsUrl: 'https://d2e1asnsl7br7b.cloudfront.net/7782/master.m3u8',
+    websiteUrl: 'https://btv.gov.bd',
+    badgeColor: 'bg-green-700',
+    resolution: '1080p FHD',
+    description: 'গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের জাতীয় রাষ্ট্রীয় সম্প্রচার মাধ্যম সরাসরি।',
+    programs: createDailySchedule('entertainment', 'বাংলাদেশ টেলিভিশন'),
+  },
+  {
     id: 'somoy-tv',
     name: 'সময় টিভি',
     nameEn: 'Somoy TV',
@@ -97,23 +115,6 @@ export const BD_CHANNELS: Channel[] = [
     resolution: '1080p FHD',
     description: 'বাংলাদেশের শীর্ষ সংবাদভিত্তিক চ্যানেল। ২৪ ঘণ্টা সর্বশেষ দেশ-বিদেশের ব্রেকিং নিউজ সরাসরি।',
     programs: createDailySchedule('news', 'সময় টিভি'),
-  },
-  {
-    id: 'btv-national',
-    name: 'বাংলাদেশ টেলিভিশন (BTV)',
-    nameEn: 'BTV National',
-    category: 'entertainment',
-    categoryLabel: 'জাতীয় ও বিনোদন',
-    streamType: 'youtube',
-    // BTV Live Stream from user: https://www.youtube.com/live/JR1eu1XmU9c
-    youtubeId: 'JR1eu1XmU9c',
-    hlsUrl: 'https://stream.btv.gov.bd/hls/btv.m3u8',
-    alternativeHlsUrl: 'https://d2e1asnsl7br7b.cloudfront.net/7782/master.m3u8',
-    websiteUrl: 'https://btv.gov.bd',
-    badgeColor: 'bg-green-700',
-    resolution: '1080p FHD',
-    description: 'গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের জাতীয় রাষ্ট্রীয় সম্প্রচার মাধ্যম সরাসরি।',
-    programs: createDailySchedule('entertainment', 'বাংলাদেশ টেলিভিশন'),
   },
   {
     id: 'jamuna-tv',
