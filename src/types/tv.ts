@@ -28,6 +28,7 @@ export interface Channel {
   streamType: 'youtube' | 'hls' | 'web' | 'custom';
   youtubeId?: string; // YouTube Live video ID or embed
   youtubeChannelId?: string;
+  youtubeLiveUrl?: string; // Direct link to channel live page (e.g. https://youtube.com/@TSportsbd/live)
   hlsUrl?: string;    // Direct m3u8 link
   alternativeHlsUrl?: string;
   websiteUrl?: string;

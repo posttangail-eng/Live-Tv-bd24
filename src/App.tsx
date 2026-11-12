@@ -17,12 +17,15 @@ import {
   Keyboard,
   ShieldCheck,
   CheckCircle2,
-  ExternalLink
+  ExternalLink,
+  Check
 } from 'lucide-react';
+import { extractYouTubeId } from './utils/youtube';
 
 const STORAGE_FAVORITES_KEY = 'bd_live_tv_favorites_v1';
 const STORAGE_CUSTOM_CHANNELS_KEY = 'bd_live_tv_custom_v1';
 const STORAGE_THEME_KEY = 'bd_live_tv_theme_v1';
+const STORAGE_OVERRIDES_KEY = 'bd_live_tv_overrides_v1';
 
 export default function App() {
   // Theme state: default dark for television cinema viewing
@@ -31,22 +34,42 @@ export default function App() {
     return saved !== null ? saved === 'true' : true;
   });
 
-  // Channels state (Default + Custom added by user)
+  // Channels state (Default + Custom + User Link Overrides)
   const [channels, setChannels] = useState<Channel[]>(() => {
     try {
+      const savedOverrides = localStorage.getItem(STORAGE_OVERRIDES_KEY);
+      const overrides: Record<string, Partial<Channel>> = savedOverrides ? JSON.parse(savedOverrides) : {};
+
       const savedCustom = localStorage.getItem(STORAGE_CUSTOM_CHANNELS_KEY);
-      if (savedCustom) {
-        const parsed = JSON.parse(savedCustom);
-        return [...BD_CHANNELS, ...parsed];
-      }
+      const customChannels: Channel[] = savedCustom ? JSON.parse(savedCustom) : [];
+
+      const baseList = [...BD_CHANNELS, ...customChannels];
+      return baseList.map((ch) => {
+        if (overrides[ch.id]) {
+          return { ...ch, ...overrides[ch.id] };
+        }
+        return ch;
+      });
     } catch (e) {
-      console.error('Failed to parse custom channels', e);
+      console.error('Failed to parse channels or overrides', e);
+      return BD_CHANNELS;
     }
-    return BD_CHANNELS;
   });
 
   // Active channel
-  const [activeChannel, setActiveChannel] = useState<Channel>(BD_CHANNELS[0]);
+  const [activeChannel, setActiveChannel] = useState<Channel>(() => {
+    try {
+      const savedOverrides = localStorage.getItem(STORAGE_OVERRIDES_KEY);
+      const overrides: Record<string, Partial<Channel>> = savedOverrides ? JSON.parse(savedOverrides) : {};
+      const first = BD_CHANNELS[0];
+      return overrides[first.id] ? { ...first, ...overrides[first.id] } : first;
+    } catch {
+      return BD_CHANNELS[0];
+    }
+  });
+
+  // Toast notification for user action
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   // Favorites state
   const [favorites, setFavorites] = useState<string[]>(() => {
@@ -117,6 +140,47 @@ export default function App() {
     handleSelectChannel(channels[prevIndex]);
   };
 
+  // Update stream link for a channel (YouTube URL/code or HLS .m3u8)
+  const handleUpdateChannelLink = (channelId: string, newLink: string) => {
+    const trimmed = newLink.trim();
+    if (!trimmed) return;
+
+    const isHls = trimmed.toLowerCase().includes('.m3u8');
+    let channelPatch: Partial<Channel>;
+
+    if (isHls) {
+      channelPatch = { streamType: 'hls', hlsUrl: trimmed };
+    } else {
+      const extractedYtId = extractYouTubeId(trimmed);
+      channelPatch = {
+        streamType: 'youtube',
+        youtubeId: extractedYtId || trimmed,
+      };
+    }
+
+    setChannels((prev) =>
+      prev.map((c) => (c.id === channelId ? { ...c, ...channelPatch } : c))
+    );
+
+    setActiveChannel((prev) => {
+      if (prev.id === channelId) {
+        return { ...prev, ...channelPatch };
+      }
+      return prev;
+    });
+
+    try {
+      const existing = JSON.parse(localStorage.getItem(STORAGE_OVERRIDES_KEY) || '{}');
+      existing[channelId] = { ...(existing[channelId] || {}), ...channelPatch };
+      localStorage.setItem(STORAGE_OVERRIDES_KEY, JSON.stringify(existing));
+    } catch (e) {
+      console.error('Error saving channel link override', e);
+    }
+
+    setToastMessage(`লিংক সফলভাবে সংরক্ষিত হয়েছে! সম্প্রচার চালু হচ্ছে...`);
+    setTimeout(() => setToastMessage(null), 4000);
+  };
+
   // Channel objects for recently watched
   const recentChannelObjects = useMemo(() => {
     return recentChannels
@@ -125,7 +189,15 @@ export default function App() {
   }, [recentChannels, channels]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white relative">
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed top-20 right-6 z-50 bg-emerald-600 text-white px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 text-xs font-semibold animate-in fade-in slide-in-from-top-4 duration-200">
+          <Check className="w-4 h-4" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
       {/* Top Header conforming to Section 2 Top Bar Contract */}
       <Header
         currentCategory={selectedCategory}
@@ -152,7 +224,31 @@ export default function App() {
             onPrevChannel={handlePrevChannel}
             isTheaterMode={isTheaterMode}
             onToggleTheater={() => setIsTheaterMode((prev) => !prev)}
+            onUpdateChannelLink={handleUpdateChannelLink}
           />
+
+          {/* Sports Broadcast Guidance Notice */}
+          {activeChannel.category === 'sports' && (
+            <div className="mt-3 p-3.5 rounded-2xl bg-amber-950/40 border border-amber-600/30 text-amber-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+              <div className="flex items-start sm:items-center gap-2.5">
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5 sm:mt-0" />
+                <p className="leading-relaxed">
+                  <strong className="text-amber-300 font-bold">খেলার লাইভ সম্প্রচার তথ্য:</strong> খেলাধুলার চ্যানেলগুলো শুধুমাত্র লাইভ ম্যাচ চলাকালীন সময়ে সরাসরি সম্প্রচার করে। আপনার কাছে আজকের লাইভ ম্যাচের ইউটিউব লিংক থাকলে উপরে <strong>"লিংক আপডেট"</strong> চাপুন অথবা সরাসরি <strong>"লাইভ হাব"</strong> খুলুন।
+                </p>
+              </div>
+              {activeChannel.youtubeLiveUrl && (
+                <a
+                  href={activeChannel.youtubeLiveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-3 py-1.5 rounded-xl bg-red-600 hover:bg-red-500 text-white font-semibold text-xs whitespace-nowrap shrink-0 flex items-center gap-1.5 self-start sm:self-auto shadow-sm transition-colors"
+                >
+                  <Tv className="w-3.5 h-3.5" />
+                  <span>লাইভ হাব খুলুন</span>
+                </a>
+              )}
+            </div>
+          )}
 
           {/* Quick Info & Quick Action Strip Below Player */}
           <div className="mt-4 p-4 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">

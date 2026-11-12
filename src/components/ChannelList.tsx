@@ -227,6 +227,21 @@ export const ChannelList: React.FC<ChannelListProps> = ({
                   </p>
                 </div>
 
+                {/* Sports live broadcast indicator */}
+                {channel.category === 'sports' && (
+                  <div className="mt-2.5 flex items-center justify-between text-[11px] text-amber-400 font-medium bg-amber-950/20 px-2 py-1 rounded-lg border border-amber-800/30">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                      <span>{channel.id === 'redbull-sports' ? '২৪/৭ সরাসরি খেলা' : 'ম্যাচ লাইভ সম্প্রচার'}</span>
+                    </span>
+                    {channel.youtubeLiveUrl && (
+                      <span className="text-[10px] bg-red-950/80 text-red-400 border border-red-800/60 px-1.5 py-0.5 rounded font-mono">
+                        লাইভ হাব
+                      </span>
+                    )}
+                  </div>
+                )}
+
                 {/* Active Indicator Bar */}
                 {isActive && (
                   <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
