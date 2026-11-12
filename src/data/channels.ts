@@ -87,9 +87,9 @@ export const BD_CHANNELS: Channel[] = [
     category: 'entertainment',
     categoryLabel: 'জাতীয় ও বিনোদন',
     streamType: 'youtube',
-    // BTV Live Stream from user: https://www.youtube.com/live/QRT8-_VZubU
-    youtubeId: 'QRT8-_VZubU',
-    youtubeLiveUrl: 'https://www.youtube.com/live/QRT8-_VZubU',
+    // BTV Live Stream from user: https://www.youtube.com/live/4ZviGprRhjY
+    youtubeId: '4ZviGprRhjY',
+    youtubeLiveUrl: 'https://www.youtube.com/live/4ZviGprRhjY',
     hlsUrl: 'https://stream.btv.gov.bd/hls/btv.m3u8',
     alternativeHlsUrl: 'https://d2e1asnsl7br7b.cloudfront.net/7782/master.m3u8',
     websiteUrl: 'https://btv.gov.bd',
